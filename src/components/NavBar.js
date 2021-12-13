@@ -9,18 +9,8 @@ const NavBar = () => {
     return (
         <>
         <Navbar bg="light" expand="lg">
-            <NavLink exact to="/home">
+            <NavLink exact to="/">
                 <h6>Inicio</h6>
-            </NavLink>
-            <NavLink exact to ="/registro">
-                <h6>Registrarse</h6>
-            </NavLink>
-            <NavLink exact to="/" onClick={() => {
-                auth.logout(() => {
-                history.push("/");
-                });
-            }}>
-                <h6>Salir</h6>      
             </NavLink>
         </Navbar>
         </>

@@ -2,10 +2,11 @@ import React,{useEffect,useState} from 'react'
 import {GoogleMap,withScriptjs, withGoogleMap, Marker} from "react-google-maps";
 import uuid from 'react-uuid';
 import { helpHttp } from '../helpers/helpHttp';
-import logo from "../icon-bicycle.svg";
+import logo from "../gren-icon1.svg";
+import logo2 from "../red-circle.svg";
 
 
-const MapaGoogle = ({markers, setBicycle,cedula,setIdDispositivo,idDispositivo}) => {
+const MapaGoogle = ({markers, setBicycle,cedula,setIdDispositivo,idDispositivo,estado}) => {
     const [usuarios, setUsuarios] = useState([]);
     const [error, setError] = useState(null);
     const [reload, setReload] = useState(true);
@@ -73,14 +74,15 @@ const MapaGoogle = ({markers, setBicycle,cedula,setIdDispositivo,idDispositivo})
 
                     {markers.map( (el) => (
                                 <>
+                                    
                                     <Marker 
                                         onClick= { ()=> setBicycle(el)}
                                         key = {uuid()} 
                                         position = {{lat: parseFloat(el.latitude), lng: parseFloat(el.longitude)}}
-                                        icon = {{url: logo, scaledSize: new window.google.maps.Size(40, 40),}}
-                                    > 
-                                    </Marker>                
+                                        icon = {{url: parseInt(el.SOS) === 0 ? logo : logo2, scaledSize: new window.google.maps.Size(40, 40),}}/>
+                                   
                                 </>
+
                             ))
                     }
                 </GoogleMap>
@@ -95,3 +97,20 @@ export default withScriptjs(
         MapaGoogle
     )
 );
+
+/*
+{if(el.status===0) ? <h1>HOLA</h1>}
+                                    {el.status ? (<Marker 
+                                        onClick= { ()=> setBicycle(el)}
+                                        key = {uuid()} 
+                                        position = {{lat: parseFloat(el.latitude), lng: parseFloat(el.longitude)}}
+                                        icon = {{url: logo, scaledSize: new window.google.maps.Size(40, 40),}}/>
+                                    ) : (
+                                        <Marker 
+                                        onClick= { ()=> setBicycle(el)}
+                                        key = {uuid()} 
+                                        position = {{lat: parseFloat(el.latitude), lng: parseFloat(el.longitude)}}
+                                        icon = {{url: logo2, scaledSize: new window.google.maps.Size(40, 40),}}/>
+                                    )
+                                    }
+*/

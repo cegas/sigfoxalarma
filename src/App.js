@@ -10,7 +10,7 @@ import {
   Switch,
 } from "react-router-dom";
 import NavBar from './components/NavBar';
-import Login from './pages/Login';
+import Inicio from './pages/Inicio';
 import PrivateRoute from './components/PrivateRoute';
 import Home from './pages/Home';
 import Registrarse from './pages/Registrarse';
@@ -25,11 +25,11 @@ function App() {
       <HashRouter>
         <NavBar/>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Inicio} />
           <Route exact path="/registro" component={Registrarse}/>
-          <PrivateRoute exact path="/home/:cedula" component={Home}/>
-          <PrivateRoute exact path="/Reservar/:cedula" component={Reservar}/>
-          <PrivateRoute exact path="/historial/:cedula" component={Historial}/>
+
+          <PrivateRoute exact path="/Reservar/" component={Reservar}/>
+
         </Switch>
       </HashRouter>
 

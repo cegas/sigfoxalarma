@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router';
 
 
-const ApiMap = ({data,cedula,status,setStatus}) => {
+const ApiMap = ({data,status,setStatus}) => {
     
     let dataValue = new Date(Date.now());
     const [messages, setMessages] = useState([]);
@@ -22,6 +22,7 @@ const ApiMap = ({data,cedula,status,setStatus}) => {
     let mapurl = "https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDkKxJUGWPwSf0Z1w7pgwvh2yGacA7ju5k";
 
     useEffect(() => {
+        console.log("HOLA")
         if(data){
             setMessages([]);
             const iterator = async () => {
@@ -48,13 +49,20 @@ const ApiMap = ({data,cedula,status,setStatus}) => {
     },[bicycle])
 
     const volverHandler = () => {
-        history.push(`/home/${cedula}`)
+        history.push(`/`)
     } 
 
     return (
         <div>
             <hr></hr>
             <Container>
+                <Row>
+                    <Col xs={3} md={2} lg={3}/>
+                    <Col xs={6} md={6} lg={6}>
+                        <h1>Proyecto Semilla  PII-DETRI-2021-01</h1>
+                    </Col>
+                    <Col xs={3} md={2} lg={2}/>
+                </Row>
                 <Row>
                     <Col>
                         {messages.length === 0 ? <h1>Cargando</h1> : 
@@ -63,7 +71,6 @@ const ApiMap = ({data,cedula,status,setStatus}) => {
                             idDispositivo={idDispositivo}
                             setIdDispositivo={setIdDispositivo}
                             markers={messages}
-                            cedula={cedula}
                             key={uuid()} 
                             googleMapURL = {mapurl} 
                             containerElement={<div style={{ height: `400px` }} />}
@@ -76,7 +83,7 @@ const ApiMap = ({data,cedula,status,setStatus}) => {
                 </Row>
                 <Row>
                     <Col lg={10} md={10} sm={10} xs={10}>
-                        {!bicycle ? (<Alert variant="primary" >Seleccione una ubicacion</Alert>):(<h1>{<TablaBicicleta setStatus={setStatus}  status={status} cedula={cedula} bicycle={bicycle}/>}</h1>) }
+                        {!bicycle ? (<Alert variant="primary" >Seleccione una ubicacion</Alert>):(<h1>{<TablaBicicleta setStatus={setStatus}  status={status}  bicycle={bicycle}/>}</h1>) }
                     </Col>
                     <Row>
                         <Col lg={2} md={2} sm={2} xs={2}>

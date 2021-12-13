@@ -74,70 +74,7 @@ const TablaBicicleta = ({bicycle,cedula,setStatus,status}) => {
         
     }, [bicycle,status,response])
 
-    const reservarHandler = (e) => {
-        console.log(validacion);
-        if(validacion === true){
-            alert("Ya tiene una reserva Activa");
-        }else{
-            //url para cambiar el status de la bicicleta
-            var aleatorio = Math.random();
-            let url = `https://0t7pkxgzl7.execute-api.eu-west-2.amazonaws.com/Modificar_Status/transactions?Cedula=${cedula}&DeviceId=${bicycle.deviceid}`;
-            //URL para cambiar el estado del usuario
-            let url2 = `https://hdy6jswri1.execute-api.eu-west-2.amazonaws.com/ModifyStatus/Transaction_Proccessor_4?Cedula=${cedula}&Status=ON&Id=${bicycle.deviceid}`;
-            helpHttp().get(url).then((res)=>{
-                if(!res.err){
-                    setStatus(aleatorio);
-                    setResponse(res);
-                    setError(null);
-                    helpHttp().get(url2).then((res)=>{
-                        if(!res.err){
-                            setResponse2(res);
-                            setError(null);
-                            alert("Reserva exitosa");
-                        }else{
-                            setResponse2(null);
-                            setError(res);
-                        }
-                    })                
-                }else{
-                    setResponse(null);
-                    setError(res);
-                }   
-            });
-        }
-        
-    }
-
-    const quitarReservaHandler = (e) => {
-        var aleatorio = Math.random();
-        let url = `https://0t7pkxgzl7.execute-api.eu-west-2.amazonaws.com/Modificar_Status/transactions?Cedula=${cedula}&DeviceId=${bicycle.deviceid}`;
-        let url2 = `https://hdy6jswri1.execute-api.eu-west-2.amazonaws.com/ModifyStatus/Transaction_Proccessor_4?Cedula=${cedula}&Status=OFF&Id=0`;
-        
-        helpHttp().get(url).then((res)=>{
-            if(!res.err){
-                setStatus(aleatorio);
-                setResponse(res);
-                setError(null);
-                helpHttp().get(url2).then((res) => {
-                    if(!res.err){
-                        setResponse2(res);
-                        setError(null);
-                        alert("Reserva finalizada");
-                    }else{
-                        setResponse2(null);
-                        setError(res);
-                        alert("Error");
-                    }
-                })
-            }else{
-                setResponse(null);
-                setError(res);
-            }
-            
-        });
-        
-
-    }
+  
     return (
         <div>
             <Form >
@@ -158,7 +95,6 @@ const TablaBicicleta = ({bicycle,cedula,setStatus,status}) => {
                             <td>{bicycle.longitude}</td>
                             <td>{bicycle.SOS}</td>
                             <td>{data}</td>
-                            {bicycle.status == "0" ? <td><Button onClick={reservarHandler} >Reservar</Button></td> : <h6>No Disponible</h6>}
                         </tr>        
                     </tbody>
                 </Table>

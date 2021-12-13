@@ -4,7 +4,7 @@ import Auth from "./Auth";
 
 let auth;
 auth = null;
-auth = true; 
+auth = false; 
 
 const PrivateRoute = ({component: Component, ...rest}) => {
     

@@ -4,7 +4,7 @@ import ApiMap from './ApiMap';
 import uuid from 'react-uuid';
 
 
-const Map = ({cedula}) => {
+const Map = () => {
     const [status, setStatus] = useState(null);
     let url2="https://5ueegwgd72.execute-api.eu-west-2.amazonaws.com/Devices/transactions";
 
@@ -14,6 +14,7 @@ const Map = ({cedula}) => {
     
     useEffect(() => {
         helpHttp().get(url2).then((res) => {
+            console.log(res);
             if(!res.err){
                 setData(JSON.parse(res.data.replace(/Decimal[(]/g,"").replace(/[)]/g,"").replace(/[']/g,`"`)));
                 setError(null);
@@ -30,7 +31,6 @@ const Map = ({cedula}) => {
             { data &&
                 <ApiMap
                     data={data}
-                    cedula={cedula}
                     status={status}
                     setStatus={setStatus}    
                 />
